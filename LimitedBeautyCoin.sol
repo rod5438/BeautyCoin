@@ -1,5 +1,5 @@
 //Write your own contracts here. Currently compiles using solc v0.4.15+commit.bbb8e64f.
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.18;
 contract BeautyCoin {
 
     mapping (address => uint256) balances;
@@ -41,6 +41,7 @@ contract BeautyCoin {
         balances[publisher] -= totalBeautyCoin;
         msg.sender.transfer(weiForRefund);
         publisher.transfer(weiForBuying);
+        Transfer(publisher, msg.sender, totalBeautyCoin);
     }
   
     function transfer(address _to, uint256 beautyCoin) public returns (bool) {
@@ -50,7 +51,7 @@ contract BeautyCoin {
          // SafeMath.sub will throw if there is not enough balance.
         balances[msg.sender] -= beautyCoin;
         balances[_to] += beautyCoin;
-        emit Transfer(msg.sender, _to, beautyCoin);
+        Transfer(msg.sender, _to, beautyCoin);
         return true;
     }
 
@@ -69,13 +70,13 @@ contract BeautyCoin {
         balances[_from] -= beautyCoin;
         balances[_to] += beautyCoin;
         allowed[_from][msg.sender] =- beautyCoin;
-        emit Transfer(_from, _to, beautyCoin);
+        Transfer(_from, _to, beautyCoin);
         return true;
     }
 
     function approve(address _spender, uint256 beautyCoin) public returns (bool) {
         allowed[msg.sender][_spender] = beautyCoin;
-        emit Approval(msg.sender, _spender, beautyCoin);
+        Approval(msg.sender, _spender, beautyCoin);
         return true;
     }
 
