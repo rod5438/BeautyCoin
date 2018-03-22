@@ -13,9 +13,9 @@ function totalSupply() public constant returns (uint);
 }
 
 contract PerfectOneToOne {
-    address coinAddress;
-    address perfectCorp;
-    address BA;
+    address public coinAddress;
+    address public perfectCorp;
+    address public BA;
     function PerfectOneToOne(address _perfectCorp, address _coinAddress) public {
         BA = msg.sender; // BA
         perfectCorp = _perfectCorp; // Perfect
