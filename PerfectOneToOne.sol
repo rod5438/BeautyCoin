@@ -27,7 +27,9 @@ contract PerfectOneToOne {
         require(beautyCoin.balanceOf(msg.sender) >= second);
         beautyCoin.transferFrom(msg.sender, BA, second -1);
         beautyCoin.transferFrom(msg.sender, perfectCorp, 1);
+        callBA(msg.sender, second);
         // coinAddress.call(bytes4(bytes32(keccak256("transferFrom(address,address,uint256)"))), msg.sender, BA, second - 1);
         // coinAddress.call(bytes4(bytes32(keccak256("transferFrom(address,address,uint256)"))), msg.sender, perfectCorp, 1);
     }
+    event callBA(address indexed caller, uint256 indexed second);
 }
